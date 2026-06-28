@@ -150,7 +150,7 @@ export default function ChatPage() {
         {/* Footer Icon at the bottom */}
         <footer className="mt-auto py-10">
           <a 
-            href="https://github.com/your-username" 
+            href="https://github.com/alynguyxn/notora-ai.git" 
             target="_blank" 
             rel="noopener noreferrer"
             className="transition-colors duration-300 text-gray-400 hover:text-accent-pop"
