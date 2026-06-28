@@ -155,7 +155,7 @@ app.listen(PORT, '0.0.0.0', () => {
 
 // This allows your frontend URL to communicate with the backend
 app.use(cors({
-  origin: 'https://YOUR-VERCEL-URL.vercel.app', // Replace with your actual Vercel URL
+  origin: 'https://notora-ai-iota.vercel.app/', // Replace with your actual Vercel URL
   methods: ['GET', 'POST'],
   credentials: true
 }));
