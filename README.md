@@ -1,3 +1,4 @@
+![Notora AI Interface](notora-github-img.png)
 # Notora AI
 Notora AI is an intelligent study companion designed to transform static study materials into interactive, conversational learning experiences. By leveraging advanced AI, Notora allows you to upload your lecture notes, textbooks, and documents to instantly generate context-aware summaries, explanations, and Q&A sessions.
 
