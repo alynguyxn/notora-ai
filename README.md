@@ -24,7 +24,7 @@ Prerequisites
 ### Installation
 1. Clone the repository:
 ```
-git clone https://github.com/your-username/notora-ai.git
+git clone https://github.com/alynguyxn/notora-ai.git
 cd notora-ai
 ```
 
