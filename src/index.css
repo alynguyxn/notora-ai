@@ -1,0 +1,36 @@
+@import "tailwindcss";
+
+@theme {
+  /* Fonts */
+  --font-sans: 'Nunito', sans-serif;
+
+  /* Colors */
+  --color-neutral-base: #F5F5F5;
+  --color-neutral-subtle: #ECECEC;
+  --color-accent-pop: #5848B3;
+  --color-soft-black: #181A18; /* Updated to your requested soft black */
+
+  /* Animations */
+  --animate-blink: blink 1.5s step-end infinite;
+  
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+}
+
+@layer base {
+  body {
+    background-color: var(--color-neutral-base);
+    color: var(--color-soft-black); /* Sets site-wide text color */
+    font-family: var(--font-sans);
+    .no-scrollbar::-webkit-scrollbar {
+    display: none;
+    }
+    /* Hide scrollbar for IE, Edge and Firefox */
+    .no-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+  }
+}
