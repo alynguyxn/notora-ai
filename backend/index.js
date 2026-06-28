@@ -41,6 +41,23 @@ async function extractTextFromPDF(buffer) {
     }
 }
 
+// Retry mechanism
+async function generateResponseWithRetry(prompt, retries = 3) {
+  for (let i = 0; i < retries; i++) {
+    try {
+      const result = await model.generateContent(prompt);
+      return result.response.text();
+    } catch (error) {
+      if (error.status === 503 && i < retries - 1) {
+        // Wait 2 seconds before retrying if it's a 503 error
+        await new Promise(resolve => setTimeout(resolve, 2000));
+        continue;
+      }
+      throw error; // If it's not a 503 or we're out of retries, throw it
+    }
+  }
+}
+
 // App Setup
 const app = express();
 app.use(cors());
