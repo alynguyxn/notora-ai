@@ -54,6 +54,17 @@ Once the upload is processed, you will be transitioned to the chat interface.
 
 Type your questions into the input bar at the bottom and hit "Ask" to start the conversation!
 
+## Project Transparency & Educational Purpose
+This application was developed as an educational project to explore the integration of Large Language Models into modern web applications.
+
+- API Integration: To power the conversational features, the project utilizes the Google Gemini API.
+
+- Transparency: This application is configured to interact with the Google AI API to process study materials and generate responses.
+
+- Security & Best Practices: As a standard security practice, API keys are managed through environment variables (.env). It is recommended that users who clone this repository utilize their own API credentials when testing or extending the functionality.
+
+- Resources: For those interested in building similar AI-powered tools, the Google AI Studio documentation provides a comprehensive starting point for obtaining and managing API keys.
+
 ## Contributing
 Contributions are welcome! If you have suggestions for new features or find a bug, please feel free to open an issue or submit a pull request.
 
