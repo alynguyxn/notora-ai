@@ -40,11 +40,11 @@ function App() {
               >
                 {({ isActive }) => (
                   <>
-                    {/* The purple bubble: visible if active or on hover */}
+                    {/* The purple bubble */}
                     <span className={`absolute inset-0 bg-accent-pop rounded-full transition-opacity duration-300 
                       ${isActive ? 'opacity-70' : 'opacity-0 group-hover:opacity-70'}`}>
                     </span>
-                    {/* Text color changes to white when active for better contrast */}
+                    {/* Text color changes to white when active */}
                     <span className={`relative z-10 transition-colors duration-300 ${isActive ? 'text-white' : 'text-soft-black'}`}>
                       {item.name}
                     </span>

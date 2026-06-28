@@ -9,14 +9,14 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 // Initialize AI
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY, {
-  // This automatically retries requests that return 503 errors
+  // Automatically retries requests that return 503 errors
   requestOptions: {
-    timeout: 30000, // 30 seconds
+    timeout: 30000,
   },
 });
 console.log("DEBUG: API Key length is", process.env.GEMINI_API_KEY ? process.env.GEMINI_API_KEY.length : "UNDEFINED");
 console.log("API Key found in process.env:", process.env.GEMINI_API_KEY ? "YES" : "NO");
-// Add this temporarily at the very top of your index.js, right after initializing genAI
+
 try {
     const testModel = genAI.getGenerativeModel({ model: "gemini-pro" });
     console.log("SUCCESS: Initialized model successfully");
@@ -49,11 +49,10 @@ async function generateResponseWithRetry(prompt, retries = 3) {
       return result.response.text();
     } catch (error) {
       if (error.status === 503 && i < retries - 1) {
-        // Wait 2 seconds before retrying if it's a 503 error
         await new Promise(resolve => setTimeout(resolve, 2000));
         continue;
       }
-      throw error; // If it's not a 503 or we're out of retries, throw it
+      throw error;
     }
   }
 }
@@ -70,7 +69,6 @@ mongoose.connect(process.env.MONGO_URI)
 const NoteSchema = new mongoose.Schema({ filename: String, content: String });
 const Note = mongoose.model('Note', NoteSchema);
 
-// Ensure you are using .memoryStorage() if you are using buffer
 const upload = multer({ storage: multer.memoryStorage() });
 
 app.get('/api/list-models', async (req, res) => {
@@ -82,9 +80,9 @@ app.get('/api/list-models', async (req, res) => {
     }
 });
 
-// Update your route to handle an array of files
+// Uploads Files
 app.post('/api/upload', upload.array('files'), async (req, res) => {
-  // Use req.files (plural)
+
   const files = req.files; 
   
   if (!files || files.length === 0) {
@@ -113,7 +111,6 @@ app.post('/api/upload', upload.array('files'), async (req, res) => {
 app.get('/api/check-my-models', async (req, res) => {
     try {
         const models = await genAI.listModels();
-        // This will show you exactly what YOUR API key is allowed to call
         const supportedModels = models.models.filter(m => 
             m.supportedGenerationMethods.includes("generateContent")
         );
@@ -127,12 +124,11 @@ app.post('/api/chat', async (req, res) => {
     try {
         const { noteId, question } = req.body;
         const note = await Note.findById(noteId);
-        
-        // Use a standard, reliable model name
-        // Do NOT use genAI.listModels()
         const model = genAI.getGenerativeModel({ model: "gemini-3.5-flash" });
-
-        const prompt = `You are helping a student make notes to study. Use these notes to answer the question. Format the notes to be neat and organized by section. Add spacing inbetween sections. 
+        const prompt = `You are helping a student make notes to study. 
+                        Use these notes to answer the question. 
+                        Format the notes to be neat and organized by section. 
+                        Add spacing inbetween sections. 
                         Notes: ${note.content} 
                         Question: ${question}`;
 
@@ -153,9 +149,9 @@ app.listen(PORT, '0.0.0.0', () => {
   console.log(`Server is running on port ${PORT}`);
 });
 
-// This allows your frontend URL to communicate with the backend
+// Allow frontend URL to communicate with backend
 app.use(cors({
-  origin: 'https://notora-ai-iota.vercel.app/', // Replace with your actual Vercel URL
+  origin: 'https://notora-ai-iota.vercel.app/',
   methods: ['GET', 'POST'],
   credentials: true
 }));
